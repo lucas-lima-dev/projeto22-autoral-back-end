@@ -7,36 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model public_posts {
-  id          Int      @id(map: "posts_pk") @default(autoincrement())
-  user_id     Int
-  description String
-  post_url    String
-  created_at  DateTime @db.Timestamp(6)
-  updated_at  DateTime @db.Timestamp(6)
-
-  @@map("public.posts")
-}
-
-model public_rating {
-  id         Int      @id(map: "Rating_pk") @default(autoincrement())
-  value      Int
+model sessions {
+  id         Int       @id @default(autoincrement())
   user_id    Int
-  post_id    Int
-  created_at DateTime @db.Timestamp(6)
-  updated_at DateTime @db.Timestamp(6)
-
-  @@map("public.rating")
+  token      String
+  created_at DateTime  @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @db.Timestamp(6)
+  users      users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model public_users {
-  id         Int      @id(map: "users_pk") @default(autoincrement())
-  username   String   @unique
-  email      String   @unique
-  password   String
-  user_url   String
-  created_at DateTime @db.Timestamp(6)
-  updated_at DateTime @db.Timestamp(6)
-
-  @@map("public.users")
+model users {
+  id         Int        @id @default(autoincrement())
+  username   String     @unique @db.VarChar(255)
+  email      String     @unique @db.VarChar(255)
+  password   String     @db.VarChar(255)
+  user_url   String     @db.VarChar(255)
+  created_at DateTime   @default(now()) @db.Timestamp(6)
+  updated_at DateTime?  @db.Timestamp(6)
+  sessions   sessions[]
 }
