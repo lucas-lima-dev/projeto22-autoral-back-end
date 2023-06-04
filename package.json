@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "prebuild": "rm -rf dist",
+    "build": "ttsc -p tsconfig.build.json",
     "start": "node ./dist/app.ts",
+    "test": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand",
+    "test:coverage": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
+    "test:watch": "cross-env NODE_ENV=test jest --watch --passWithNoTests --runInBand",
+    "test:load-envs": "dotenv -e .env.test",
     "dev": " cross-env NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
   },
   "repository": {
