@@ -24,6 +24,7 @@ async function singIn(req: Request, res: Response, next: NextFunction) {
   try {
     const result = await userService.signIn({ email, password });
 
+    console.log(result.token);
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
     next(error);

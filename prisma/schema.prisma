@@ -33,6 +33,9 @@ model posts {
   user_id     Int
   description String
   url         String
+  title       String
+  image       String
+  brief       String
   created_at  DateTime  @default(now()) @db.Timestamp(6)
   updated_at  DateTime? @db.Timestamp(6)
   deleted_at  DateTime? @db.Timestamp(6)

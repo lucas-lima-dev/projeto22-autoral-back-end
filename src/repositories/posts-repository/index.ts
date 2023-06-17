@@ -1,28 +1,24 @@
-import { prisma } from '@/config';
+import { prisma } from "@/config";
 
-async function createPost({ url, description, user_id }:any) {
-    return prisma.posts.create({
-        data: {
-            user_id,
-            description,
-            url,
-        }
-    })
+async function createPost(data: any) {
+  return prisma.posts.create({
+    data,
+  });
 }
 
-async function readPost() {
-    return prisma.posts.findMany()
+async function readAllPosts() {
+  return prisma.posts.findMany();
 }
 
 async function updatePost() {}
 
-async function deletePost(){}
+async function deletePost() {}
 
 const postRepository = {
-    createPost,
-    readPost,
-    updatePost,
-    deletePost,
-}
+  createPost,
+  readAllPosts,
+  updatePost,
+  deletePost,
+};
 
 export default postRepository;
