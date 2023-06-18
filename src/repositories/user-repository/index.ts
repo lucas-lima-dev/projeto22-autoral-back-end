@@ -14,6 +14,21 @@ async function findByEmail(email: string) {
   });
 }
 
-const userRepository = {create,findByEmail}
+async function searchUsers({ username }: any) {
+  return prisma.users.findMany({
+    where: {
+      username: {
+        contains: username,
+      },
+    },
+    select:{
+      id: true,
+      username: true,
+      user_url: true,
+    }
+  });
+}
+
+const userRepository = {create,findByEmail, searchUsers}
 
 export default userRepository;

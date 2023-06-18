@@ -22,27 +22,6 @@ async function readAllPosts() {
   const allPosts = await postRepository.readAllPosts();
   return allPosts;
 }
-// async function readPost() {
-//   try {
-//     const allPosts = await postRepository.readPost();
-//     const p: any = [];
-
-//     await Promise.all(
-//       allPosts.map(async (post: any) => {
-//         const meta = await urlMetadata(post.url);
-//         post.title = meta.title;
-//         post.image = meta.image;
-//         post.brief = meta.description;
-//         p.push(post);
-//       })
-//     );
-
-//     return p;
-//   } catch (error) {
-//     console.log(error);
-//     throw badRequestError();
-//   }
-// }
 
 async function updatePost() {}
 

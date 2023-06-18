@@ -24,8 +24,19 @@ async function singIn(req: Request, res: Response, next: NextFunction) {
   try {
     const result = await userService.signIn({ email, password });
 
-    console.log(result.token);
     return res.status(httpStatus.OK).send(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function searchUsers(req: Request, res: Response, next: NextFunction) {
+  const { username } = req.body;
+
+  try {
+    const users = await userService.searchUsers({ username });
+
+    return res.status(httpStatus.OK).send(users);
   } catch (error) {
     next(error);
   }
@@ -34,6 +45,7 @@ async function singIn(req: Request, res: Response, next: NextFunction) {
 const userController = {
   createUser,
   singIn,
+  searchUsers
 };
 
 export default userController;

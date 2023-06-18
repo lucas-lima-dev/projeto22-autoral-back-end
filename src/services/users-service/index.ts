@@ -38,9 +38,14 @@ async function signIn({ email, password }: any) {
   };
 }
 
+async function searchUsers({ username }: any) {
+  const users = await userRepository.searchUsers({ username });
+  return users;
+}
 const userService = {
   createUser,
   signIn,
+  searchUsers
 };
 
 export default userService;
