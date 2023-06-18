@@ -18,6 +18,7 @@ async function readPost(req: Request, res: Response, next: NextFunction){
 
     try {
         const allPosts = await postService.readAllPosts();
+        
         return res.status(httpStatus.OK).send(allPosts);
     } catch (error) {
         next(error)
