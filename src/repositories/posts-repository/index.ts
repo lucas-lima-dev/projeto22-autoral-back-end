@@ -39,7 +39,13 @@ async function updatePost({ id, description }:any) {
   });
 }
 
-async function deletePost() {}
+async function deletePost(id: any) {
+  return prisma.posts.delete({
+    where: {
+      id,
+    },
+  });
+}
 
 async function readPostById(id: number) {
   return prisma.posts.findUnique({

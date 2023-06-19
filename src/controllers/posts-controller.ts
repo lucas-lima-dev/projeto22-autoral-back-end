@@ -40,7 +40,15 @@ async function updatePost(req: Request, res: Response, next: NextFunction){
 }
 
 async function deletePost(req: Request, res: Response, next: NextFunction){
-    
+    const user_id = res.locals.user_id;
+    const { id } = req.params;
+
+    try {
+        await postService.deletePost({ id, user_id });
+        return res.status(httpStatus.NO_CONTENT).send("OK");
+    } catch (error) {
+        next(error);
+    }
 }
 
 const postController = {

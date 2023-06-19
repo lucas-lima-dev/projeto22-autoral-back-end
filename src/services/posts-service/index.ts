@@ -38,7 +38,19 @@ async function updatePost({ id, description, user_id }: any) {
   return updatedPost;
 }
 
-async function deletePost() {}
+async function deletePost({ id, user_id }: any) {
+  const post = await postRepository.readPostById(id);
+
+  if (!post) {
+    throw badRequestError();
+  }
+
+  if (post.user_id !== user_id) {
+    throw forBiddenError();
+  }
+
+  await postRepository.deletePost(id);
+}
 
 const postService = {
   createPost,
