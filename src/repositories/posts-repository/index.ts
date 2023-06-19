@@ -28,15 +28,33 @@ async function readAllPosts() {
   });
 }
 
-async function updatePost() {}
+async function updatePost({ id, description }:any) {
+  return prisma.posts.update({
+    where: {
+      id,
+    },
+    data: {
+      description,
+    },
+  });
+}
 
 async function deletePost() {}
+
+async function readPostById(id: number) {
+  return prisma.posts.findUnique({
+    where: {
+      id,
+    },
+  });
+}
 
 const postRepository = {
   createPost,
   readAllPosts,
   updatePost,
   deletePost,
+  readPostById,
 };
 
 export default postRepository;

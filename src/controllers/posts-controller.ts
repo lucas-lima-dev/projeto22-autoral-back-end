@@ -27,7 +27,16 @@ async function readPost(req: Request, res: Response, next: NextFunction){
 }
 
 async function updatePost(req: Request, res: Response, next: NextFunction){
+    const user_id = res.locals.user_id;
+    const { id } = req.params;
+    const { description } = req.body;
 
+    try {
+        const updatedDescription = await postService.updatePost({ id, description, user_id });
+        return res.status(httpStatus.OK).send(updatedDescription);
+    } catch (error) {
+        next(error);
+    }
 }
 
 async function deletePost(req: Request, res: Response, next: NextFunction){

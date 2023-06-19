@@ -1,4 +1,4 @@
-import { badRequestError } from "@/errors";
+import { badRequestError, forBiddenError } from "@/errors";
 import postRepository from "@/repositories/posts-repository";
 import urlMetadata from "url-metadata";
 
@@ -23,7 +23,20 @@ async function readAllPosts() {
   return allPosts;
 }
 
-async function updatePost() {}
+async function updatePost({ id, description, user_id }: any) {
+  const post = await postRepository.readPostById(id);
+
+  if (!post) {
+    throw badRequestError();
+  }
+
+  if (post.user_id !== user_id) {
+    throw forBiddenError();
+  }
+
+  const updatedPost = await postRepository.updatePost({ id, description });
+  return updatedPost;
+}
 
 async function deletePost() {}
 
