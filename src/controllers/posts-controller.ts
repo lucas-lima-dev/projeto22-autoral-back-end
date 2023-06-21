@@ -43,6 +43,7 @@ async function updatePost(req: Request, res: Response, next: NextFunction){
 async function deletePost(req: Request, res: Response, next: NextFunction){
     const user_id = res.locals.user_id;
     const { id } = req.params;
+    console.log(id, user_id);
 
     try {
         await postService.deletePost( Number(id), Number(user_id) );
