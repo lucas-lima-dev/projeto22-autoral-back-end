@@ -29,10 +29,11 @@ async function readPost(req: Request, res: Response, next: NextFunction){
 async function updatePost(req: Request, res: Response, next: NextFunction){
     const user_id = res.locals.user_id;
     const { id } = req.params;
-    const { description } = req.body;
+    const { description } = req.body as { description: string };
+    
 
     try {
-        const updatedDescription = await postService.updatePost({ id, description, user_id });
+        const updatedDescription = await postService.updatePost( Number(id), description, Number(user_id) );
         return res.status(httpStatus.OK).send(updatedDescription);
     } catch (error) {
         next(error);
@@ -44,7 +45,7 @@ async function deletePost(req: Request, res: Response, next: NextFunction){
     const { id } = req.params;
 
     try {
-        await postService.deletePost({ id, user_id });
+        await postService.deletePost( Number(id), Number(user_id) );
         return res.status(httpStatus.NO_CONTENT).send("OK");
     } catch (error) {
         next(error);

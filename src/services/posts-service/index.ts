@@ -23,9 +23,9 @@ async function readAllPosts() {
   return allPosts;
 }
 
-async function updatePost({ id, description, user_id }: any) {
+async function updatePost( id: number, description: string, user_id:number) {
   const post = await postRepository.readPostById(id);
-
+  
   if (!post) {
     throw badRequestError();
   }
@@ -38,7 +38,7 @@ async function updatePost({ id, description, user_id }: any) {
   return updatedPost;
 }
 
-async function deletePost({ id, user_id }: any) {
+async function deletePost( id: number, user_id:number ) {
   const post = await postRepository.readPostById(id);
 
   if (!post) {
