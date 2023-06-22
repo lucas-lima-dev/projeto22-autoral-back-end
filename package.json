@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "ttsc -p tsconfig.build.json",
+    "build": "tsup src",
     "start": "node ./dist/app.ts",
     "test": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand",
     "test:coverage": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
@@ -37,6 +37,7 @@
     "jsonwebtoken": "^9.0.0",
     "node-fetch": "^3.3.1",
     "redis": "^4.6.7",
+    "ttypescript": "^1.5.15",
     "url-metadata": "2.5"
   },
   "devDependencies": {
@@ -58,6 +59,7 @@
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
     "tsconfig-paths": "^4.2.0",
+    "tsup": "^7.0.0",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4",
     "typescript-transform-paths": "^3.4.6"
