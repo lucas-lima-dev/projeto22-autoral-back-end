@@ -6,12 +6,14 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsup src",
-    "start": "node ./dist/app.ts",
+    "start": "npm run prisma:migrate:deploy && node dist/server.js",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "test": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand",
     "test:coverage": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand --coverage --collectCoverageFrom='./src/**'",
     "test:watch": "cross-env NODE_ENV=test jest --watch --passWithNoTests --runInBand",
     "test:load-envs": "dotenv -e .env.test",
-    "dev": " cross-env NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
+    "dev": "cross-env NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
   },
   "repository": {
     "type": "git",
@@ -63,5 +65,8 @@
     "tsx": "^3.12.7",
     "typescript": "^5.0.4",
     "typescript-transform-paths": "^3.4.6"
+  },
+  "directories": {
+    "test": "tests"
   }
 }

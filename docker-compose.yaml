@@ -6,11 +6,11 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - pgData:/var/lib/postgresql/data
+      - postgres-volume:/var/lib/postgresql/data
     env_file:
       - .env
-  node_app:
-    container_name: node_app
+  node:
+    container_name: node
     build: .
     ports:
       - 1234:4000
@@ -20,4 +20,4 @@ services:
       - db
 
 volumes:
-  pgData:
+  postgres-volume:
