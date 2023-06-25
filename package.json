@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsup src",
-    "start": "npm run prisma:migrate:deploy && node dist/server.js",
+    "start": "node dist/server.js",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "test": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand",
