@@ -1,5 +1,5 @@
 services:
-  db:
+  postgres:
     image: postgres
     container_name: postgres
     restart: always
@@ -13,11 +13,11 @@ services:
     container_name: node
     build: .
     ports:
-      - 1234:4000
+      - 4000:4000
     env_file:
       - .env
     depends_on:
-      - db
+      - postgres
 
 volumes:
   postgres-volume:
